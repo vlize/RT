@@ -20,7 +20,10 @@ rx = 0
 ry = 0
 rz = 0
 
-paraboloid
+#tore
+#hyperboloid
+#paraboloid
+ellipsoid
 0xFFFF00
 px = 0
 py = 0
@@ -28,10 +31,15 @@ pz = 0
 rx = 0
 ry = 0
 rz = 0
-a = 2
-b = 2
-c = 2
-elliptic
+a = 20
+b = 20
+c = 20
+#elliptic
+#hyperbolic
+#two sheets
+#one sheet
+#r = 20
+#R = 50
 
 sphere
 0xFF0000

@@ -6,7 +6,7 @@
 /*   By: vlize <vlize@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/21 15:45:00 by vlize             #+#    #+#             */
-/*   Updated: 2016/02/15 12:05:05 by vlize            ###   ########.fr       */
+/*   Updated: 2016/02/16 09:55:12 by vlize            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 # define SPECULAR_POW 16
 # define SPOT_LIGHT_INT 0x155
 # define SPOT_LIGHT_POW 4096
-# define EPSILON 0.0001
+# define EPSILON 0.001
 # define PI2 6.283185307179587
 # define RADIAN 0.01745329251994329
 # define INVALID "Invalid file"

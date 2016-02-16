@@ -6,7 +6,7 @@
 /*   By: vlize <vlize@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/09 09:23:06 by vlize             #+#    #+#             */
-/*   Updated: 2016/02/15 11:38:37 by vlize            ###   ########.fr       */
+/*   Updated: 2016/02/16 09:53:00 by vlize            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,16 @@ static void	ft_specular_highlight(int *color, float *k, float *n, t_env *env)
 
 static void	ft_diffuse_light(int *color, t_env *env)
 {
-	t_vec	*l;
+	t_vec	*lux;
 	float	n[6];
 	float	k[4];
 
 	ft_normal(n, env);
-	l = env->vec;
-	k[0] = (l->vx * n[0]) + (l->vy * n[1]) + (l->vz * n[2]);
+	lux = env->vec;
+	k[0] = (lux->vx * n[0]) + (lux->vy * n[1]) + (lux->vz * n[2]);
 	if (k[0] <= EPSILON)
 		return ;
-	k[2] = sqrtf(l->pow2_vx + l->pow2_vy + l->pow2_vz);
+	k[2] = sqrtf(lux->pow2_vx + lux->pow2_vy + lux->pow2_vz);
 	k[3] = sqrtf(n[3] + n[4] + n[5]);
 	if ((k[1] = k[2] * k[3]) <= EPSILON)
 		return ;
@@ -84,9 +84,9 @@ static void	ft_lux_collision(int *color, t_env *env)
 	obj = env->obj;
 	while (obj)
 	{
-			pt1 = ft_ray_collision(obj, env->vec);
-			if (ft_nearest_point(pt, pt1, env->vec))
-				i = 1;
+		pt1 = ft_ray_collision(obj, env->vec);
+		if (ft_nearest_point(pt, pt1, env->vec))
+			i = 1;
 		obj = obj->next;
 	}
 	if (i)

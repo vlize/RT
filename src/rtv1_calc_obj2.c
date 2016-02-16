@@ -6,7 +6,7 @@
 /*   By: vlize <vlize@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/09 14:54:28 by vlize             #+#    #+#             */
-/*   Updated: 2016/02/15 11:37:58 by vlize            ###   ########.fr       */
+/*   Updated: 2016/02/16 11:39:20 by vlize            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,20 @@ float	*ft_paraboloid(t_obj *obj, t_vec *vec)
 	static float	pt1[3];
 	float			pt0[6];
 	float			v0[6];
-	float			k[2];
+	float			*k;
 
 	ft_set_v0(v0, vec);
 	ft_rot_v0_pt0(v0, pt0, obj, vec);
-	k[1] = v0[3] * pt0[3] / obj->pow2_d;
-	k[1] += obj->sign * (v0[4] * pt0[4] / obj->pow2_e);
-	if (fabs(k[1]) < EPSILON)
+	obj->a = v0[3] / obj->pow2_d + obj->sign * v0[4] / obj->pow2_e;
+	obj->b = v0[0] * pt0[0] / obj->pow2_d;
+	obj->b += obj->sign * v0[1] * pt0[1] / obj->pow2_e;
+	obj->b = obj->b * 2 - v0[2] / obj->f;
+	obj->c = pt0[3] / obj->pow2_d + obj->sign * pt0[4] / obj->pow2_e;
+	obj->c -= pt0[2] / obj->f;
+	if (!(k = ft_quadratic_equation(obj->a, obj->b, obj->c)))
 		return (NULL);
-	k[0] = (v0[2] * pt0[2]) / (obj->f * k[1]);
+	if ((k[0] > k[1]) && (k[1] >= EPSILON))
+		k[0] = k[1];
 	if (k[0] < EPSILON)
 		return (NULL);
 	pt1[0] = v0[0] * k[0] + pt0[0];
@@ -68,9 +73,12 @@ float	*ft_hyperboloid(t_obj *obj, t_vec *vec)
 
 	ft_set_v0(v0, vec);
 	ft_rot_v0_pt0(v0, pt0, obj, vec);
-	obj->a = (v0[3] * pt0[3] / obj->pow2_e) + (v0[4] * pt0[4] / obj->pow2_d);
-	obj->a -= v0[5] * pt0[5] / obj->pow2_f;
-	if (!(k = ft_quadratic_equation(obj->a, 0, obj->sign)))
+	obj->a = v0[3] / obj->pow2_d + v0[4] / obj->pow2_e - v0[5] / obj->pow2_f;
+	obj->b = v0[0] * pt0[0] / obj->pow2_d + v0[1] * pt0[1] / obj->pow2_e;
+	obj->b -= v0[2] * pt0[2] / obj->pow2_f;
+	obj->c = pt0[3] * obj->pow2_d + pt0[4] / obj->pow2_e;
+	obj->c += obj->sign - pt0[5] / obj->pow2_f;
+	if (!(k = ft_quadratic_equation(obj->a, obj->b, obj->c)))
 		return (NULL);
 	if ((k[0] > k[1]) && (k[1] >= EPSILON))
 		k[0] = k[1];
@@ -91,9 +99,12 @@ float	*ft_ellipsoid(t_obj *obj, t_vec *vec)
 
 	ft_set_v0(v0, vec);
 	ft_rot_v0_pt0(v0, pt0, obj, vec);
-	obj->a = (v0[3] * pt0[3] / obj->pow2_e) + (v0[4] * pt0[4] / obj->pow2_d);
-	obj->a += v0[5] * pt0[5] / obj->pow2_f;
-	if (!(k = ft_quadratic_equation(obj->a, 0, -1)))
+	obj->a = v0[3] / obj->pow2_d + v0[4] / obj->pow2_e + v0[5] / obj->pow2_f;
+	obj->b = v0[0] * pt0[0] / obj->pow2_d + v0[1] * pt0[1] / obj->pow2_e;
+	obj->b += v0[2] * pt0[2] / obj->pow2_f;
+	obj->c = pt0[3] * obj->pow2_d + pt0[4] / obj->pow2_e;
+	obj->c += pt0[5] / obj->pow2_f - 1;
+	if (!(k = ft_quadratic_equation(obj->a, obj->b, obj->c)))
 		return (NULL);
 	if ((k[0] > k[1]) && (k[1] >= EPSILON))
 		k[0] = k[1];

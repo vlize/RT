@@ -6,7 +6,7 @@
 /*   By: vlize <vlize@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/10 14:16:08 by vlize             #+#    #+#             */
-/*   Updated: 2016/02/15 14:24:10 by vlize            ###   ########.fr       */
+/*   Updated: 2016/02/27 13:15:31 by vlize            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,18 @@ static void	ft_hyperboloid_normal(float *n, t_env *env)
 
 static void	ft_mobius_strip_normal(float *n, t_env *env)
 {
-	if (n && env)
-		return ;
+	float	p[3];
+	float	pow2_p[3];
+
+	ft_vector_rotation(p, env->vec, env->obj0, 1);
+	pow2_p[0] = powf(p[0], 2);
+	pow2_p[1] = powf(p[1], 2);
+	pow2_p[2] = powf(p[2], 2);
+	n[0] = 2 * (p[0] * (p[1] - 2 * p[2]) - env->obj0->d * p[2]);
+	n[1] = 3 * pow2_p[1] - 2 * p[2] * p[1] + pow2_p[0] + pow2_p[2];
+	n[1] -= env->obj0->pow2_d;
+	n[2] = 2 * (p[1] * p[2] - pow2_p[1] - pow2_p[0] - env->obj0->d * p[0]);
+	ft_vector_rotation(n, NULL, env->obj0, 0);
 }
 
 void		ft_normal2(float *n, t_env *env)

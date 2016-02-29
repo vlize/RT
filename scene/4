@@ -22,8 +22,8 @@ rz = 0
 
 #tore
 #hyperboloid
-#paraboloid
-ellipsoid
+#ellipsoid
+paraboloid
 0xFFFF00
 px = 0
 py = 0
@@ -34,7 +34,7 @@ rz = 0
 a = 20
 b = 20
 c = 20
-#elliptic
+elliptic
 #hyperbolic
 #two sheets
 #one sheet

@@ -6,7 +6,7 @@
 /*   By: vlize <vlize@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/26 13:14:50 by vlize             #+#    #+#             */
-/*   Updated: 2016/02/29 08:46:04 by vlize            ###   ########.fr       */
+/*   Updated: 2016/02/29 11:19:22 by vlize            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,24 +26,6 @@ void	ft_angle_cos_sin(float angle, float angle_cos_sin[3])
 	angle_cos_sin[0] = angle;
 	angle_cos_sin[1] = cos(angle);
 	angle_cos_sin[2] = sin(angle);
-}
-
-void	ft_check_color(int *color)
-{
-	if (!color)
-		return ;
-	if (color[0] > 0xFF)
-		color[0] = 0xFF;
-	else if (color[0] < 0)
-		color[0] = 0;
-	if (color[1] > 0xFF)
-		color[1] = 0xFF;
-	else if (color[1] < 0)
-		color[1] = 0;
-	if (color[2] > 0xFF)
-		color[2] = 0xFF;
-	else if (color[2] < 0)
-		color[2] = 0;
 }
 
 void	ft_set_nbr(int i, char *str, float *nbr, t_env *env)

@@ -14,7 +14,8 @@ NAME = rtv1
 
 SRC_NAME =	rtv1.c rtv1_exit.c rtv1_init.c rtv1_read.c rtv1_make.c rtv1_set.c \
 			rtv1_draw.c rtv1_equation.c rtv1_sub_function.c rtv1_object.c \
-			rtv1_normal.c rtv1_spot.c rtv1_lux.c rtv1_object2.c rtv1_normal2.c
+			rtv1_normal.c rtv1_spot.c rtv1_lux.c rtv1_object2.c rtv1_normal2.c \
+			rtv1_check.c
 
 LIB =	-L ./libft/ -lft \
 		-lmlx -lm \

@@ -6,7 +6,7 @@
 /*   By: vlize <vlize@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/21 15:45:00 by vlize             #+#    #+#             */
-/*   Updated: 2016/02/15 11:35:28 by vlize            ###   ########.fr       */
+/*   Updated: 2016/02/29 11:11:09 by vlize            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,21 +52,6 @@ static void	ft_make_cam(t_cam *cam, t_env *env)
 	cam->pow2_px = powf(cam->px, 2);
 	cam->pow2_py = powf(cam->py, 2);
 	cam->pow2_pz = powf(cam->pz, 2);
-}
-
-static int	ft_is_object(char *str)
-{
-	if (!ft_strcmp(str, SPHERE) || !ft_strcmp(str, PLANE))
-		return (1);
-	if (!ft_strcmp(str, CYLINDER) || !ft_strcmp(str, CONE))
-		return (1);
-	if (!ft_strcmp(str, TORE) || !ft_strcmp(str, HYPERBOLOID))
-		return (1);
-	if (!ft_strcmp(str, PARABOLOID) || !ft_strcmp(str, ELLIPSOID))
-		return (1);
-	if (!ft_strcmp(str, MOBIUS_STRIP))
-		return (1);
-	return (0);
 }
 
 void		ft_read_file(t_env *env)

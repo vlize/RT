@@ -6,23 +6,12 @@
 /*   By: vlize <vlize@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/10 08:51:46 by vlize             #+#    #+#             */
-/*   Updated: 2016/02/29 08:39:46 by vlize            ###   ########.fr       */
+/*   Updated: 2016/02/29 11:20:30 by vlize            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "rtv1.h"
-
-static int	ft_end_with_oid(char *str)
-{
-	if (!ft_strcmp(str, HYPERBOLOID))
-		return (1);
-	if (!ft_strcmp(str, PARABOLOID))
-		return (1);
-	if (!ft_strcmp(str, ELLIPSOID))
-		return (1);
-	return (0);
-}
 
 static void ft_set_not_null(char *str, float *nbr, t_env *env)
 {
@@ -33,14 +22,8 @@ static void ft_set_not_null(char *str, float *nbr, t_env *env)
 	exit(ft_put_error(env->name, INVALID, env));
 }
 
-static void	ft_make_obj1(t_obj *obj, t_env *env)
+static void	ft_make_obj2(t_obj *obj, t_env *env)
 {
-	ft_set_not_null(A, &obj->d, env);
-	ft_set_not_null(B, &obj->e, env);
-	ft_set_not_null(C, &obj->f, env);
-	obj->pow2_d = powf(obj->d, 2);
-	obj->pow2_e = powf(obj->e, 2);
-	obj->pow2_f = powf(obj->f, 2);
 	obj->sign = 1;
 	if (obj->type[0] == HYPERBOLOID[0])
 	{
@@ -49,15 +32,30 @@ static void	ft_make_obj1(t_obj *obj, t_env *env)
 		else if (ft_strcmp(env->line, SHEET2))
 			exit(ft_put_error(env->name, INVALID, env));
 		ft_inc_gnl(env);
+		return ;
 	}
-	else if (obj->type[0] == PARABOLOID[0])
+	if (!ft_strcmp(env->line, HYPERBOLIC))
+		obj->sign = -1;
+	else if (ft_strcmp(env->line, ELLIPTIC))
+		exit(ft_put_error(env->name, INVALID, env));
+	ft_inc_gnl(env);
+}
+
+static void	ft_make_obj1(t_obj *obj, t_env *env)
+{
+	ft_set_not_null(A, &obj->d, env);
+	ft_set_not_null(B, &obj->e, env);
+	ft_set_not_null(C, &obj->f, env);
+	obj->pow2_d = powf(obj->d, 2);
+	obj->pow2_e = powf(obj->e, 2);
+	obj->pow2_f = powf(obj->f, 2);
+	if (obj->type[0] != PARABOLOID[0])
 	{
-		if (!ft_strcmp(env->line, HYPERBOLIC))
-			obj->sign = -1;
-		else if (ft_strcmp(env->line, ELLIPTIC))
-			exit(ft_put_error(env->name, INVALID, env));
-		ft_inc_gnl(env);
+		ft_set_not_null(R, &obj->r, env);
+		obj->pow2_r = powf(obj->r, 2);
 	}
+	if (obj->type[0] != ELLIPSOID[0])
+		return (ft_make_obj2(obj, env));
 }
 
 static void	ft_make_obj0(t_obj *obj, t_env *env)

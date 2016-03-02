@@ -6,7 +6,7 @@
 /*   By: vlize <vlize@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/10 14:58:06 by vlize             #+#    #+#             */
-/*   Updated: 2016/02/16 09:40:01 by vlize            ###   ########.fr       */
+/*   Updated: 2016/03/02 09:12:32 by vlize            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,6 @@ void		ft_normal(float *n, t_env *env)
 		ft_cone_normal(n, env);
 	else if (!ft_strcmp(env->obj0->type, CYLINDER))
 		ft_cylinder_normal(n, env);
-	else if (!ft_strcmp(env->obj0->type, ELLIPSOID))
-		ft_sphere_normal(n, env);
 	else
 		ft_normal2(n, env);
 	ft_normal_direction(n, env->vec0);

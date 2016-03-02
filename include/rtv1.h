@@ -6,7 +6,7 @@
 /*   By: vlize <vlize@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/21 15:45:00 by vlize             #+#    #+#             */
-/*   Updated: 2016/02/16 09:55:12 by vlize            ###   ########.fr       */
+/*   Updated: 2016/02/29 11:20:29 by vlize            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,8 @@ typedef struct		s_env
 	t_spot			*spot0;
 }					t_env;
 
+int					ft_end_with_oid(char *str);
+int					ft_is_object(char *str);
 int					ft_inc_gnl(t_env *env);
 int					ft_perror(char *msg, t_env *env);
 int					ft_put_error(char *name, char *msg, t_env *env);

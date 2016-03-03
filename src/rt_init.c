@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rtv1_init.c                                        :+:      :+:    :+:   */
+/*   rt_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlize <vlize@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/26 09:36:58 by vlize             #+#    #+#             */
-/*   Updated: 2016/02/15 11:34:15 by vlize            ###   ########.fr       */
+/*   Updated: 2016/03/03 08:38:43 by vlize            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "rtv1.h"
+#include "rt.h"
 #include "mlx.h"
 
 static void	ft_init_env0(t_env *env)
@@ -26,7 +26,7 @@ static void	ft_init_env0(t_env *env)
 		exit(ft_perror(MALLOC, env));
 	if (!(env->mlx = mlx_init()))
 		exit(ft_perror("mlx_init()", env));
-	if (!(env->win = mlx_new_window(env->mlx, WIDTH, HEIGHT, PROG)))
+	if (!(env->win = mlx_new_window(env->mlx, WIDTH, HEIGHT, "RT")))
 		exit(ft_perror("mlx_new_window()", env));
 	if (!(env->img = mlx_new_image(env->mlx, WIDTH, HEIGHT)))
 		exit(ft_perror("mlx_new_image()", env));

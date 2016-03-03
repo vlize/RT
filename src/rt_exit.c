@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rtv1_exit.c                                        :+:      :+:    :+:   */
+/*   rt_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlize <vlize@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/21 15:45:00 by vlize             #+#    #+#             */
-/*   Updated: 2015/12/28 16:58:39 by vlize            ###   ########.fr       */
+/*   Updated: 2016/03/03 08:38:39 by vlize            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "rtv1.h"
+#include "rt.h"
 #include "mlx.h"
 
 static void	ft_free_spot(t_spot *spot)
@@ -33,8 +33,6 @@ static void	ft_free_obj(t_obj *obj)
 	while (obj)
 	{
 		tmp = obj->next;
-		if (obj->type)
-			free(obj->type);
 		free(obj);
 		obj = tmp;
 	}
@@ -65,7 +63,6 @@ int			ft_free_env(t_env *env)
 int			ft_perror(char *name, t_env *env)
 {
 	ft_putstr_fd(PROG, 2);
-	ft_putstr_fd(COLON, 2);
 	perror(name);
 	return (ft_free_env(env));
 }
@@ -73,11 +70,10 @@ int			ft_perror(char *name, t_env *env)
 int			ft_put_error(char *name, char *msg, t_env *env)
 {
 	ft_putstr_fd(PROG, 2);
-	ft_putstr_fd(COLON, 2);
 	if (name)
 	{
 		ft_putstr_fd(name, 2);
-		ft_putstr_fd(COLON, 2);
+		ft_putstr_fd(": ", 2);
 	}
 	ft_putstr_fd(msg, 2);
 	if (!ft_strcmp(msg, INVALID))
@@ -86,6 +82,6 @@ int			ft_put_error(char *name, char *msg, t_env *env)
 		ft_putnbr_fd(env->line_nbr, 2);
 		ft_putchar_fd(')', 2);
 	}
-	write(1, "\n", 1);
+	ft_putchar_fd('\n', 2);
 	return (ft_free_env(env));
 }

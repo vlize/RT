@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rtv1_draw.c                                        :+:      :+:    :+:   */
+/*   rt_draw.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlize <vlize@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/21 15:45:00 by vlize             #+#    #+#             */
-/*   Updated: 2016/02/15 11:33:42 by vlize            ###   ########.fr       */
+/*   Updated: 2016/03/03 08:38:33 by vlize            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "rtv1.h"
+#include "rt.h"
 #include "mlx.h"
 
 int			ft_nearest_point(float pt[4], float *pt1, t_vec *vec)
@@ -35,23 +35,23 @@ float		*ft_ray_collision(t_obj *obj, t_vec *vec)
 {
 	if (!obj || !vec)
 		return (NULL);
-	if (!ft_strcmp(obj->type, PLANE))
+	if (obj->type == PLANE)
 		return (ft_plane(obj, vec));
-	else if (!ft_strcmp(obj->type, SPHERE))
+	else if (obj->type == SPHERE)
 		return (ft_sphere(obj, vec));
-	else if (!ft_strcmp(obj->type, CYLINDER))
+	else if (obj->type == CYLINDER)
 		return (ft_cylinder(obj, vec));
-	else if (!ft_strcmp(obj->type, CONE))
+	else if (obj->type == CONE)
 		return (ft_cone(obj, vec));
-	else if (!ft_strcmp(obj->type, TORE))
-		return (ft_tore(obj, vec));
-	else if (!ft_strcmp(obj->type, ELLIPSOID))
+	else if (obj->type == TORUS)
+		return (ft_torus(obj, vec));
+	else if (obj->type == ELLIPSOID)
 		return (ft_ellipsoid(obj, vec));
-	else if (!ft_strcmp(obj->type, PARABOLOID))
+	else if (obj->type == PARABOLOID)
 		return (ft_paraboloid(obj, vec));
-	else if (!ft_strcmp(obj->type, HYPERBOLOID))
+	else if (obj->type == HYPERBOLOID)
 		return (ft_hyperboloid(obj, vec));
-	else if (!ft_strcmp(obj->type, MOBIUS_STRIP))
+	else if (obj->type == MOBIUS_STRIP)
 		return (ft_mobius_strip(obj, vec));
 	return (NULL);
 }
@@ -64,9 +64,6 @@ static void	ft_set_cam_vector(int i, int j, t_vec *vec0, t_cam *cam)
 	vec0->vx = cam->vx[i][j];
 	vec0->vy = cam->vy[i][j];
 	vec0->vz = cam->vz[i][j];
-	vec0->pow2_px = cam->pow2_px;
-	vec0->pow2_py = cam->pow2_py;
-	vec0->pow2_pz = cam->pow2_pz;
 	vec0->pow2_vx = cam->pow2_vx[i][j];
 	vec0->pow2_vy = cam->pow2_vy[i][j];
 	vec0->pow2_vz = cam->pow2_vz[i][j];

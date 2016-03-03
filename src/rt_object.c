@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rtv1_object.c                                      :+:      :+:    :+:   */
+/*   rt_object.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlize <vlize@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/27 14:52:54 by vlize             #+#    #+#             */
-/*   Updated: 2016/02/29 08:44:49 by vlize            ###   ########.fr       */
+/*   Updated: 2016/03/03 08:39:04 by vlize            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "rtv1.h"
+#include "rt.h"
 
 float	*ft_plane(t_obj *obj, t_vec *vec)
 {
@@ -36,14 +36,15 @@ float	*ft_sphere(t_obj *obj, t_vec *vec)
 {
 	static float	pt1[3];
 	float			pt0[3];
+	float			deg[3];
 	float			*k;
 
 	ft_set_pt0(pt0, obj, vec);
-	obj->a = vec->pow2_vx + vec->pow2_vy + vec->pow2_vz;
-	obj->b = vec->vx * pt0[0] + vec->vy * pt0[1];
-	obj->b = (obj->b + vec->vz * pt0[2]) * 2;
-	obj->c = powf(pt0[0], 2) + powf(pt0[1], 2) + powf(pt0[2], 2) - obj->pow2_r;
-	if (!(k = ft_quadratic_equation(obj->a, obj->b, obj->c)))
+	deg[2] = vec->pow2_vx + vec->pow2_vy + vec->pow2_vz;
+	deg[1] = vec->vx * pt0[0] + vec->vy * pt0[1];
+	deg[1] = (deg[1] + vec->vz * pt0[2]) * 2;
+	deg[0] = powf(pt0[0], 2) + powf(pt0[1], 2) + powf(pt0[2], 2) - obj->pow2_r;
+	if (!(k = ft_quadratic_equation(deg[2], deg[1], deg[0])))
 		return (NULL);
 	if ((k[0] > k[1]) && (k[1] >= EPSILON))
 		k[0] = k[1];
@@ -60,14 +61,15 @@ float	*ft_cylinder(t_obj *obj, t_vec *vec)
 	static float	pt1[3];
 	float			pt0[6];
 	float			v0[6];
+	float			deg[3];
 	float			*k;
 
 	ft_set_v0(v0, vec);
 	ft_rot_v0_pt0(v0, pt0, obj, vec);
-	obj->a = v0[3] + v0[4];
-	obj->b = (v0[0] * pt0[0] + v0[1] * pt0[1]) * 2;
-	obj->c = pt0[3] + pt0[4] - obj->pow2_r;
-	if (!(k = ft_quadratic_equation(obj->a, obj->b, obj->c)))
+	deg[2] = v0[3] + v0[4];
+	deg[1] = (v0[0] * pt0[0] + v0[1] * pt0[1]) * 2;
+	deg[0] = pt0[3] + pt0[4] - obj->pow2_r;
+	if (!(k = ft_quadratic_equation(deg[2], deg[1], deg[0])))
 		return (NULL);
 	if ((k[0] > k[1]) && (k[1] >= EPSILON))
 		k[0] = k[1];
@@ -84,15 +86,16 @@ float	*ft_cone(t_obj *obj, t_vec *vec)
 	static float	pt1[3];
 	float			pt0[6];
 	float			v0[6];
+	float			deg[3];
 	float			*k;
 
 	ft_set_v0(v0, vec);
 	ft_rot_v0_pt0(v0, pt0, obj, vec);
-	obj->a = v0[3] + v0[4] - v0[5] * obj->tan2_r;
-	obj->b = v0[0] * pt0[0] + v0[1] * pt0[1] - v0[2] * pt0[2] * obj->tan2_r;
-	obj->b *= 2;
-	obj->c = pt0[3] + pt0[4] - pt0[5] * obj->tan2_r;
-	if (!(k = ft_quadratic_equation(obj->a, obj->b, obj->c)))
+	deg[2] = v0[3] + v0[4] - v0[5] * obj->tan2_r;
+	deg[1] = v0[0] * pt0[0] + v0[1] * pt0[1] - v0[2] * pt0[2] * obj->tan2_r;
+	deg[1] *= 2;
+	deg[0] = pt0[3] + pt0[4] - pt0[5] * obj->tan2_r;
+	if (!(k = ft_quadratic_equation(deg[2], deg[1], deg[0])))
 		return (NULL);
 	if ((k[0] > k[1]) && (k[1] >= EPSILON))
 		k[0] = k[1];

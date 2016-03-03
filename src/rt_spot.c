@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rtv1_spot.c                                        :+:      :+:    :+:   */
+/*   rt_spot.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlize <vlize@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/28 10:38:16 by vlize             #+#    #+#             */
-/*   Updated: 2016/02/29 08:45:03 by vlize            ###   ########.fr       */
+/*   Updated: 2016/03/03 08:39:21 by vlize            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "rtv1.h"
+#include "rt.h"
 
 static void	ft_spot_light(int *color, float *k, t_env *env)
 {
@@ -59,9 +59,6 @@ void		ft_spot_tracing(int *color, t_env *env)
 	env->vec->px = env->vec0->px;
 	env->vec->py = env->vec0->py;
 	env->vec->pz = env->vec0->pz;
-	env->vec->pow2_px = env->vec0->pow2_px;
-	env->vec->pow2_py = env->vec0->pow2_py;
-	env->vec->pow2_pz = env->vec0->pow2_pz;
 	k[2] = sqrtf(env->vec0->pow2_vx + env->vec0->pow2_vy + env->vec0->pow2_vz);
 	while (env->spot0)
 	{

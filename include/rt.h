@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rtv1.h                                             :+:      :+:    :+:   */
+/*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlize <vlize@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/21 15:45:00 by vlize             #+#    #+#             */
-/*   Updated: 2016/02/29 11:20:29 by vlize            ###   ########.fr       */
+/*   Updated: 2016/03/03 08:36:39 by vlize            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,23 +41,18 @@
 # define GNL "get_next_line()"
 # define MALLOC "malloc()"
 # define CLOSE "close()"
-# define PROG "rtv1"
-# define COLON ": "
+# define PROG "rt: "
 # define CAM "cam"
 # define SPOT "spot"
-# define CONE "cone"
-# define TORE "tore"
-# define PLANE "plane"
-# define SPHERE "sphere"
-# define CYLINDER "cylinder"
-# define ELLIPSOID "ellipsoid"
-# define PARABOLOID "paraboloid"
-# define HYPERBOLOID "hyperboloid"
-# define MOBIUS_STRIP "Möbius strip"
-# define HYPERBOLIC "hyperbolic"
-# define ELLIPTIC "elliptic"
-# define SHEET2 "two sheets"
-# define SHEET1 "one sheet"
+# define CONE 4
+# define TORUS 8
+# define PLANE 1
+# define SPHERE 2
+# define CYLINDER 3
+# define ELLIPSOID 5
+# define PARABOLOID 6
+# define HYPERBOLOID 7
+# define MOBIUS_STRIP 9
 # define PX "px = "
 # define PY "py = "
 # define PZ "pz = "
@@ -79,9 +74,6 @@ typedef struct		s_vec
 	float			vx;
 	float			vy;
 	float			vz;
-	float			pow2_px;
-	float			pow2_py;
-	float			pow2_pz;
 	float			pow2_vx;
 	float			pow2_vy;
 	float			pow2_vz;
@@ -97,7 +89,7 @@ typedef struct		s_spot
 
 typedef struct		s_obj
 {
-	char			*type;
+	int				type;
 	int				nbr;
 	int				red;
 	int				green;
@@ -113,20 +105,16 @@ typedef struct		s_obj
 	float			tan_r;
 	float			tan2_r;
 	float			pow2_r;
+	float			rt;
+	float			pow2_rt;
 	float			a;
 	float			b;
 	float			c;
+	float			d;
 	float			pow2_a;
 	float			pow2_b;
 	float			pow2_c;
-	float			rt;
-	float			pow2_rt;
-	float			d;
-	float			e;
-	float			f;
 	float			pow2_d;
-	float			pow2_e;
-	float			pow2_f;
 	struct s_obj	*next;
 }					t_obj;
 
@@ -138,9 +126,6 @@ typedef struct		s_cam
 	float			rx[3];
 	float			ry[3];
 	float			rz[3];
-	float			pow2_px;
-	float			pow2_py;
-	float			pow2_pz;
 	float			pow2_vx[WIDTH][HEIGHT];
 	float			pow2_vy[WIDTH][HEIGHT];
 	float			pow2_vz[WIDTH][HEIGHT];
@@ -178,14 +163,14 @@ typedef struct		s_env
 	t_spot			*spot0;
 }					t_env;
 
-int					ft_end_with_oid(char *str);
+int					ft_end_with_oid(int type);
 int					ft_is_object(char *str);
 int					ft_inc_gnl(t_env *env);
 int					ft_perror(char *msg, t_env *env);
 int					ft_put_error(char *name, char *msg, t_env *env);
 int					ft_free_env(t_env *env);
 void				ft_init_env(t_env *env);
-void				ft_make_obj(t_env *env);
+void				ft_make_obj(t_env *env, int type);
 void				ft_read_file(t_env *env);
 void				ft_init_vector(t_cam *cam, t_env *env);
 void				ft_set_nbr(int i, char *str, float *nbr, t_env *env);
@@ -200,11 +185,12 @@ void				ft_set_pt0(float *pt0, t_obj *obj, t_vec *vec);
 void				ft_rot_v0_pt0(float *v, float *p, t_obj *obj, t_vec *vec);
 float				*ft_rot_pt1(float *pt1, t_obj *obj);
 float				*ft_quadratic_equation(float a, float b, float c);
+float				*ft_tore_equation(float *eq1, float *eq2);
 float				*ft_plane(t_obj *obj, t_vec *vec);
 float				*ft_sphere(t_obj *obj, t_vec *vec);
 float				*ft_cylinder(t_obj *obj, t_vec *vec);
 float				*ft_cone(t_obj *obj, t_vec *vec);
-float				*ft_tore(t_obj *obj, t_vec *vec);
+float				*ft_torus(t_obj *obj, t_vec *vec);
 float				*ft_paraboloid(t_obj *obj, t_vec *vec);
 float				*ft_hyperboloid(t_obj *obj, t_vec *vec);
 float				*ft_ellipsoid(t_obj *obj, t_vec *vec);
@@ -217,5 +203,6 @@ void				ft_normal2(float *n, t_env *env);
 void				ft_normal(float *v, t_env *env);
 void				ft_check_color(int	*color);
 void				ft_spot_tracing(int *color, t_env *env);
+void				ft_mobius_strip_normal(float *n, t_env *env);
 
 #endif

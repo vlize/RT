@@ -10,12 +10,11 @@
 #                                                                              #
 #******************************************************************************#
 
-NAME = rtv1
+NAME = rt
 
-SRC_NAME =	rtv1.c rtv1_exit.c rtv1_init.c rtv1_read.c rtv1_make.c rtv1_set.c \
-			rtv1_draw.c rtv1_equation.c rtv1_sub_function.c rtv1_object.c \
-			rtv1_normal.c rtv1_spot.c rtv1_lux.c rtv1_object2.c rtv1_normal2.c \
-			rtv1_check.c
+SRC_NAME =	rt.c rt_exit.c rt_init.c rt_read.c rt_make.c rt_set.c rt_draw.c \
+			rt_equation.c rt_sub_function.c rt_object.c rt_normal.c rt_spot.c \
+			rt_lux.c rt_object2.c rt_normal2.c rt_check.c rt_mobius.c
 
 LIB =	-L ./libft/ -lft \
 		-lmlx -lm \

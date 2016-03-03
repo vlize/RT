@@ -1,40 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rtv1_check.c                                       :+:      :+:    :+:   */
+/*   rt_check.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlize <vlize@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/29 11:09:00 by vlize             #+#    #+#             */
-/*   Updated: 2016/02/29 11:18:51 by vlize            ###   ########.fr       */
+/*   Updated: 2016/03/03 08:38:29 by vlize            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "rtv1.h"
+#include "rt.h"
 
 int		ft_is_object(char *str)
 {
-	if (!ft_strcmp(str, SPHERE) || !ft_strcmp(str, PLANE))
-		return (1);
-	if (!ft_strcmp(str, CYLINDER) || !ft_strcmp(str, CONE))
-		return (1);
-	if (!ft_strcmp(str, TORE) || !ft_strcmp(str, HYPERBOLOID))
-		return (1);
-	if (!ft_strcmp(str, PARABOLOID) || !ft_strcmp(str, ELLIPSOID))
-		return (1);
-	if (!ft_strcmp(str, MOBIUS_STRIP))
-		return (1);
+	if (!ft_strcmp(str, "plane"))
+		return (PLANE);
+	if (!ft_strcmp(str, "sphere"))
+		return (SPHERE);
+	if (!ft_strcmp(str, "cone"))
+		return (CONE);
+	if (!ft_strcmp(str, "cylinder"))
+		return (CYLINDER);
+	if (!ft_strcmp(str, "ellipsoid"))
+		return (ELLIPSOID);
+	if (!ft_strcmp(str, "paraboloid"))
+		return (PARABOLOID);
+	if (!ft_strcmp(str, "hyperboloid"))
+		return (HYPERBOLOID);
+	if (!ft_strcmp(str, "torus"))
+		return (TORUS);
+	if (!ft_strcmp(str, "Möbius strip"))
+		return (MOBIUS_STRIP);
 	return (0);
 }
 
-int		ft_end_with_oid(char *str)
+int		ft_end_with_oid(int type)
 {
-	if (!ft_strcmp(str, HYPERBOLOID))
-		return (1);
-	if (!ft_strcmp(str, PARABOLOID))
-		return (1);
-	if (!ft_strcmp(str, ELLIPSOID))
+	if ((type == HYPERBOLOID) || (type == PARABOLOID) || (type == ELLIPSOID))
 		return (1);
 	return (0);
 }

@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rtv1_lux.c                                         :+:      :+:    :+:   */
+/*   rt_lux.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlize <vlize@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/09 09:23:06 by vlize             #+#    #+#             */
-/*   Updated: 2016/02/29 08:45:53 by vlize            ###   ########.fr       */
+/*   Updated: 2016/03/03 08:38:48 by vlize            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "rtv1.h"
+#include "rt.h"
 
 static void	ft_ambient_light(int *color, t_env *env)
 {
@@ -103,9 +103,6 @@ void		ft_lux_tracing(int *color, float *pt, t_env *env)
 	env->vec->px = pt[0];
 	env->vec->py = pt[1];
 	env->vec->pz = pt[2];
-	env->vec->pow2_px = powf(pt[0], 2);
-	env->vec->pow2_py = powf(pt[1], 2);
-	env->vec->pow2_pz = powf(pt[2], 2);
 	while (env->spot0)
 	{
 		env->vec->vx = env->spot0->px - pt[0];

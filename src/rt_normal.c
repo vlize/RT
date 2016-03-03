@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rtv1_normal.c                                      :+:      :+:    :+:   */
+/*   rt_normal.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlize <vlize@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/10 14:58:06 by vlize             #+#    #+#             */
-/*   Updated: 2016/03/02 09:12:32 by vlize            ###   ########.fr       */
+/*   Updated: 2016/03/03 08:38:59 by vlize            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "rtv1.h"
+#include "rt.h"
 
 static void	ft_plane_normal(float *n, t_env *env)
 {
@@ -59,13 +59,13 @@ static void	ft_cone_normal(float *n, t_env *env)
 
 void		ft_normal(float *n, t_env *env)
 {
-	if (!ft_strcmp(env->obj0->type, PLANE))
+	if (env->obj0->type == PLANE)
 		ft_plane_normal(n, env);
-	else if (!ft_strcmp(env->obj0->type, SPHERE))
+	else if (env->obj0->type == SPHERE)
 		ft_sphere_normal(n, env);
-	else if (!ft_strcmp(env->obj0->type, CONE))
+	else if (env->obj0->type == CONE)
 		ft_cone_normal(n, env);
-	else if (!ft_strcmp(env->obj0->type, CYLINDER))
+	else if (env->obj0->type == CYLINDER)
 		ft_cylinder_normal(n, env);
 	else
 		ft_normal2(n, env);

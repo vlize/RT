@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rtv1_normal2.c                                     :+:      :+:    :+:   */
+/*   rt_normal2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlize <vlize@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/10 14:16:08 by vlize             #+#    #+#             */
-/*   Updated: 2016/03/02 09:15:07 by vlize            ###   ########.fr       */
+/*   Updated: 2016/03/03 08:39:01 by vlize            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "rtv1.h"
+#include "rt.h"
 
-static void	ft_tore_normal(float *n, t_env *env)
+static void	ft_torus_normal(float *n, t_env *env)
 {
 	float	k;
 
@@ -32,9 +32,9 @@ static void	ft_tore_normal(float *n, t_env *env)
 static void	ft_paraboloid_normal(float *n, t_env *env)
 {
 	ft_vector_rotation(n, env->vec, env->obj0, 1);
-	n[0] = 2 * n[0] / env->obj0->pow2_d;
-	n[1] = env->obj0->sign * 2 * n[1] / env->obj0->pow2_e;
-	n[2] = -1 / env->obj0->f;
+	n[0] = 2 * n[0] / env->obj0->pow2_a;
+	n[1] = env->obj0->sign * 2 * n[1] / env->obj0->pow2_b;
+	n[2] = -1 / env->obj0->c;
 	ft_vector_rotation(n, NULL, env->obj0, 0);
 	n[3] = powf(n[0], 2);
 	n[4] = powf(n[1], 2);
@@ -44,9 +44,9 @@ static void	ft_paraboloid_normal(float *n, t_env *env)
 static void	ft_hyperboloid_normal(float *n, t_env *env)
 {
 	ft_vector_rotation(n, env->vec, env->obj0, 1);
-	n[0] = 2 * n[0] / env->obj0->pow2_d;
-	n[1] = 2 * n[1] / env->obj0->pow2_e;
-	n[2] = -2 * n[2] / env->obj0->pow2_f;
+	n[0] = 2 * n[0] / env->obj0->pow2_a;
+	n[1] = 2 * n[1] / env->obj0->pow2_b;
+	n[2] = -2 * n[2] / env->obj0->pow2_c;
 	ft_vector_rotation(n, NULL, env->obj0, 0);
 	n[3] = powf(n[0], 2);
 	n[4] = powf(n[1], 2);
@@ -56,28 +56,9 @@ static void	ft_hyperboloid_normal(float *n, t_env *env)
 static void	ft_ellipsoid_normal(float *n, t_env *env)
 {
 	ft_vector_rotation(n, env->vec, env->obj0, 1);
-	n[0] = 2 * n[0] / env->obj0->pow2_d;
-	n[1] = 2 * n[1] / env->obj0->pow2_e;
-	n[2] = 2 * n[2] / env->obj0->pow2_f;
-	ft_vector_rotation(n, NULL, env->obj0, 0);
-	n[3] = powf(n[0], 2);
-	n[4] = powf(n[1], 2);
-	n[5] = powf(n[2], 2);
-}
-
-static void	ft_mobius_strip_normal(float *n, t_env *env)
-{
-	float	p[3];
-	float	pow2_p[3];
-
-	ft_vector_rotation(p, env->vec, env->obj0, 1);
-	pow2_p[0] = powf(p[0], 2);
-	pow2_p[1] = powf(p[1], 2);
-	pow2_p[2] = powf(p[2], 2);
-	n[0] = 2 * (p[0] * (p[1] - 2 * p[2]) - env->obj0->d * p[2]);
-	n[1] = 3 * pow2_p[1] - 2 * p[2] * p[1] + pow2_p[0] + pow2_p[2];
-	n[1] -= env->obj0->pow2_d;
-	n[2] = 2 * (p[1] * p[2] - pow2_p[1] - pow2_p[0] - env->obj0->d * p[0]);
+	n[0] = 2 * n[0] / env->obj0->pow2_a;
+	n[1] = 2 * n[1] / env->obj0->pow2_b;
+	n[2] = 2 * n[2] / env->obj0->pow2_c;
 	ft_vector_rotation(n, NULL, env->obj0, 0);
 	n[3] = powf(n[0], 2);
 	n[4] = powf(n[1], 2);
@@ -86,14 +67,14 @@ static void	ft_mobius_strip_normal(float *n, t_env *env)
 
 void		ft_normal2(float *n, t_env *env)
 {
-	if (!ft_strcmp(env->obj0->type, TORE))
-		ft_tore_normal(n, env);
-	else if (!ft_strcmp(env->obj0->type, PARABOLOID))
+	if (env->obj0->type == TORUS)
+		ft_torus_normal(n, env);
+	else if (env->obj0->type == PARABOLOID)
 		ft_paraboloid_normal(n, env);
-	else if (!ft_strcmp(env->obj0->type, HYPERBOLOID))
+	else if (env->obj0->type == HYPERBOLOID)
 		ft_hyperboloid_normal(n, env);
-	else if (!ft_strcmp(env->obj0->type, ELLIPSOID))
+	else if (env->obj0->type == ELLIPSOID)
 		ft_ellipsoid_normal(n, env);
-	else if (!ft_strcmp(env->obj0->type, MOBIUS_STRIP))
+	else if (env->obj0->type == MOBIUS_STRIP)
 		ft_mobius_strip_normal(n, env);
 }

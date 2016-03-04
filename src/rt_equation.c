@@ -6,7 +6,7 @@
 /*   By: vlize <vlize@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/27 09:42:26 by vlize             #+#    #+#             */
-/*   Updated: 2016/03/03 08:38:36 by vlize            ###   ########.fr       */
+/*   Updated: 2016/03/04 08:17:26 by vlize            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,29 +28,6 @@ float	*ft_quadratic_equation(float a, float b, float c)
 	result[0] = (k[1] + delta) / k[0];
 	result[1] = (k[1] - delta) / k[0];
 	return (result);
-}
-
-float	*ft_tore_equation(float *eq1, float *eq2)
-{
-	static float	r[2];
-	float			*k;
-
-	if (!(k = ft_quadratic_equation(eq1[2], eq1[1], eq1[0])))
-		return (NULL);
-	r[0] = k[0];
-	r[1] = k[1];
-	if ((k = ft_quadratic_equation(eq2[2], eq2[1], eq2[0])))
-	{
-		if ((fabsf(r[0] - k[0]) < EPSILON) || (fabsf(r[0] - k[1]) < EPSILON))
-			r[0] = -1;
-		if ((fabsf(r[1] - k[0]) < EPSILON) || (fabsf(r[1] - k[1]) < EPSILON))
-			r[0] = -1;
-	}
-	if ((r[0] > r[1]) && (r[1] >= EPSILON))
-		r[0] = r[1];
-	if (r[0] < EPSILON)
-		return (NULL);
-	return (r);
 }
 
 void	ft_rotation_matrix(float *absc, float *ord, float angle[3], int neg)

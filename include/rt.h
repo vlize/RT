@@ -6,7 +6,7 @@
 /*   By: vlize <vlize@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/21 15:45:00 by vlize             #+#    #+#             */
-/*   Updated: 2016/03/03 08:36:39 by vlize            ###   ########.fr       */
+/*   Updated: 2016/03/04 08:27:15 by vlize            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,7 +185,7 @@ void				ft_set_pt0(float *pt0, t_obj *obj, t_vec *vec);
 void				ft_rot_v0_pt0(float *v, float *p, t_obj *obj, t_vec *vec);
 float				*ft_rot_pt1(float *pt1, t_obj *obj);
 float				*ft_quadratic_equation(float a, float b, float c);
-float				*ft_tore_equation(float *eq1, float *eq2);
+float				*ft_torus_equation(float *degree);
 float				*ft_plane(t_obj *obj, t_vec *vec);
 float				*ft_sphere(t_obj *obj, t_vec *vec);
 float				*ft_cylinder(t_obj *obj, t_vec *vec);

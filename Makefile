@@ -14,7 +14,8 @@ NAME = rt
 
 SRC_NAME =	rt.c rt_exit.c rt_init.c rt_read.c rt_make.c rt_set.c rt_draw.c \
 			rt_equation.c rt_sub_function.c rt_object.c rt_normal.c rt_spot.c \
-			rt_lux.c rt_object2.c rt_normal2.c rt_check.c rt_mobius.c
+			rt_object2.c rt_normal2.c rt_check.c rt_mobius.c rt_equation2.c \
+			rt_lux.c
 
 LIB =	-L ./libft/ -lft \
 		-lmlx -lm \

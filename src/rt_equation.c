@@ -6,7 +6,7 @@
 /*   By: vlize <vlize@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/27 09:42:26 by vlize             #+#    #+#             */
-/*   Updated: 2016/03/04 08:17:26 by vlize            ###   ########.fr       */
+/*   Updated: 2016/03/09 14:31:41 by vlize            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,31 @@ float	*ft_quadratic_equation(float a, float b, float c)
 	delta = sqrtf(delta);
 	result[0] = (k[1] + delta) / k[0];
 	result[1] = (k[1] - delta) / k[0];
+	if ((result[0] > result[1]) && (result[1] >= EPSILON))
+		result[0] = result[1];
+	if (result[0] < EPSILON)
+		return (NULL);
 	return (result);
+}
+
+void	ft_complex_roots(float *real, float *imag, float k)
+{
+	float	tmp;
+
+	if (!imag[1])
+	{
+		real[1] = sqrtf(real[1]);
+		real[2] = k / (real[0] * real[1]);
+		return ;
+	}
+	else
+	{
+		tmp = sqrtf((hypotf(real[1], imag[1]) - real[1]) / 2);
+		real[1] = imag[1] / (2 * tmp);
+		imag[1] = tmp;
+	}
+	real[2] = k / (real[1] * powf(imag[1], 2) / real[1]);
+	imag[2] = 0 - real[2] * imag[1] / real[1];
 }
 
 void	ft_rotation_matrix(float *absc, float *ord, float angle[3], int neg)

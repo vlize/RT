@@ -6,12 +6,12 @@
 /*   By: vlize <vlize@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/21 15:45:00 by vlize             #+#    #+#             */
-/*   Updated: 2016/03/04 08:27:15 by vlize            ###   ########.fr       */
+/*   Updated: 2016/03/09 15:53:22 by vlize            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RTV1_H
-# define RTV1_H
+#ifndef RT_H
+# define RT_H
 
 # include <limits.h>
 # include <unistd.h>
@@ -180,12 +180,14 @@ void				ft_angle_cos_sin(float angle, float angle_cos_sin[3]);
 void				ft_rotation_matrix(float *a, float *o, float an[3], int n);
 void				ft_vector_rotation(float v[3], t_vec *ve, t_obj *ob, int n);
 void				ft_vector_equation(t_obj *obj);
+void				ft_complex_roots(float *real, float *imag, float k);
 void				ft_set_v0(float *v0, t_vec *vec);
 void				ft_set_pt0(float *pt0, t_obj *obj, t_vec *vec);
 void				ft_rot_v0_pt0(float *v, float *p, t_obj *obj, t_vec *vec);
 float				*ft_rot_pt1(float *pt1, t_obj *obj);
 float				*ft_quadratic_equation(float a, float b, float c);
-float				*ft_torus_equation(float *degree);
+float				*ft_quartic_equation(float *degree);
+float				*ft_cubic_equation(float *degree, float *xi);
 float				*ft_plane(t_obj *obj, t_vec *vec);
 float				*ft_sphere(t_obj *obj, t_vec *vec);
 float				*ft_cylinder(t_obj *obj, t_vec *vec);

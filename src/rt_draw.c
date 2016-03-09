@@ -6,7 +6,7 @@
 /*   By: vlize <vlize@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/21 15:45:00 by vlize             #+#    #+#             */
-/*   Updated: 2016/03/03 08:38:33 by vlize            ###   ########.fr       */
+/*   Updated: 2016/03/04 13:18:44 by vlize            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static void	ft_ray_tracing(int i, int j, int *color, t_env *env)
 	color[1] = BLUE_0;
 	color[2] = GREEN_0;
 	env->obj0 = NULL;
-	pt[3] = DBL_MAX;
+	pt[3] = FLT_MAX;
 	obj = env->obj;
 	ft_set_cam_vector(i, j, env->vec0, env->cam);
 	while (obj)

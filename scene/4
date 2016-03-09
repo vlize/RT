@@ -20,26 +20,27 @@ rx = 0
 ry = 0
 rz = 0
 
-#tore
 #hyperboloid
 #paraboloid
-ellipsoid
+#ellipsoid
+#torus
+Möbius strip
 0xFFFF00
 px = 0
 py = 0
 pz = 0
-rx = 45
+rx = 0
 ry = 0
 rz = 0
-a = 3
-b = 2
-c = 1
-r = 50
+r = 1
+#R = 2
+#a = 3
+#b = 2
+#c = 1
 #one sheet
 #two sheets
 #hyperbolic
 #elliptic
-#R = 50
 
 sphere
 0xFF0000

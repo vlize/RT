@@ -6,7 +6,7 @@
 /*   By: vlize <vlize@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/27 14:52:54 by vlize             #+#    #+#             */
-/*   Updated: 2016/03/03 08:39:04 by vlize            ###   ########.fr       */
+/*   Updated: 2016/03/04 09:47:09 by vlize            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,6 @@ float	*ft_sphere(t_obj *obj, t_vec *vec)
 	deg[0] = powf(pt0[0], 2) + powf(pt0[1], 2) + powf(pt0[2], 2) - obj->pow2_r;
 	if (!(k = ft_quadratic_equation(deg[2], deg[1], deg[0])))
 		return (NULL);
-	if ((k[0] > k[1]) && (k[1] >= EPSILON))
-		k[0] = k[1];
-	if (k[0] < EPSILON)
-		return (NULL);
 	pt1[0] = vec->vx * k[0] + vec->px;
 	pt1[1] = vec->vy * k[0] + vec->py;
 	pt1[2] = vec->vz * k[0] + vec->pz;
@@ -70,10 +66,6 @@ float	*ft_cylinder(t_obj *obj, t_vec *vec)
 	deg[1] = (v0[0] * pt0[0] + v0[1] * pt0[1]) * 2;
 	deg[0] = pt0[3] + pt0[4] - obj->pow2_r;
 	if (!(k = ft_quadratic_equation(deg[2], deg[1], deg[0])))
-		return (NULL);
-	if ((k[0] > k[1]) && (k[1] >= EPSILON))
-		k[0] = k[1];
-	if (k[0] < EPSILON)
 		return (NULL);
 	pt1[0] = v0[0] * k[0] + pt0[0];
 	pt1[1] = v0[1] * k[0] + pt0[1];
@@ -96,10 +88,6 @@ float	*ft_cone(t_obj *obj, t_vec *vec)
 	deg[1] *= 2;
 	deg[0] = pt0[3] + pt0[4] - pt0[5] * obj->tan2_r;
 	if (!(k = ft_quadratic_equation(deg[2], deg[1], deg[0])))
-		return (NULL);
-	if ((k[0] > k[1]) && (k[1] >= EPSILON))
-		k[0] = k[1];
-	if (k[0] < EPSILON)
 		return (NULL);
 	pt1[0] = v0[0] * k[0] + pt0[0];
 	pt1[1] = v0[1] * k[0] + pt0[1];

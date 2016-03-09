@@ -6,7 +6,7 @@
 /*   By: vlize <vlize@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/09 09:23:06 by vlize             #+#    #+#             */
-/*   Updated: 2016/03/03 08:38:48 by vlize            ###   ########.fr       */
+/*   Updated: 2016/03/04 13:47:44 by vlize            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ static void	ft_diffuse_light(int *color, t_env *env)
 	k[3] = sqrtf(n[3] + n[4] + n[5]);
 	if ((k[1] = k[2] * k[3]) <= EPSILON)
 		return ;
-	k[0] /= k[1];
+	if ((k[0] /= k[1]) > 1)
+		k[0] = 1;
 	color[0] += color[3] * k[0];
 	color[1] += color[4] * k[0];
 	color[2] += color[5] * k[0];

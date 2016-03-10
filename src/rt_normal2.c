@@ -6,7 +6,7 @@
 /*   By: vlize <vlize@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/10 14:16:08 by vlize             #+#    #+#             */
-/*   Updated: 2016/03/03 08:39:01 by vlize            ###   ########.fr       */
+/*   Updated: 2016/03/10 13:14:15 by vlize            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void		ft_normal2(float *n, t_env *env)
 		ft_hyperboloid_normal(n, env);
 	else if (env->obj0->type == ELLIPSOID)
 		ft_ellipsoid_normal(n, env);
-	else if (env->obj0->type == MOBIUS_STRIP)
-		ft_mobius_strip_normal(n, env);
+	else
+		return (ft_normal3(n, env));
+	ft_normal_direction(n, env->vec0);
 }

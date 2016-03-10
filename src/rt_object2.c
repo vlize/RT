@@ -6,7 +6,7 @@
 /*   By: vlize <vlize@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/09 14:54:28 by vlize             #+#    #+#             */
-/*   Updated: 2016/03/09 15:11:27 by vlize            ###   ########.fr       */
+/*   Updated: 2016/03/10 13:08:26 by vlize            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@ float		*ft_torus(t_obj *obj, t_vec *vec)
 	static float	pt1[3];
 	float			pt0[6];
 	float			v0[6];
-	float			degree[5];
+	float			d[5];
 	float			*k;
 
 	ft_set_v0(v0, vec);
 	ft_rot_v0_pt0(v0, pt0, obj, vec);
-	ft_torus0(obj, pt0, v0, degree);
-	if (!(k = ft_quartic_equation(degree)))
+	ft_torus0(obj, pt0, v0, d);
+	if (!(k = ft_quartic_equation(d)))
 		return (NULL);
 	pt1[0] = v0[0] * k[0] + pt0[0];
 	pt1[1] = v0[1] * k[0] + pt0[1];
@@ -66,18 +66,18 @@ float		*ft_paraboloid(t_obj *obj, t_vec *vec)
 	static float	pt1[3];
 	float			pt0[6];
 	float			v0[6];
-	float			deg[3];
+	float			d[3];
 	float			*k;
 
 	ft_set_v0(v0, vec);
 	ft_rot_v0_pt0(v0, pt0, obj, vec);
-	deg[2] = v0[3] / obj->pow2_a + obj->sign * v0[4] / obj->pow2_b;
-	deg[1] = v0[0] * pt0[0] / obj->pow2_a;
-	deg[1] += obj->sign * v0[1] * pt0[1] / obj->pow2_b;
-	deg[1] = deg[1] * 2 - v0[2] / obj->c;
-	deg[0] = pt0[3] / obj->pow2_a + obj->sign * pt0[4] / obj->pow2_b;
-	deg[0] -= pt0[2] / obj->c;
-	if (!(k = ft_quadratic_equation(deg[2], deg[1], deg[0])))
+	d[2] = v0[3] / obj->pow2_a + obj->sign * v0[4] / obj->pow2_b;
+	d[1] = v0[0] * pt0[0] / obj->pow2_a;
+	d[1] += obj->sign * v0[1] * pt0[1] / obj->pow2_b;
+	d[1] = d[1] * 2 - v0[2] / obj->c;
+	d[0] = pt0[3] / obj->pow2_a + obj->sign * pt0[4] / obj->pow2_b;
+	d[0] -= pt0[2] / obj->c;
+	if (!(k = ft_quadratic_equation(d[2], d[1], d[0])))
 		return (NULL);
 	pt1[0] = v0[0] * k[0] + pt0[0];
 	pt1[1] = v0[1] * k[0] + pt0[1];
@@ -90,17 +90,17 @@ float		*ft_hyperboloid(t_obj *obj, t_vec *vec)
 	static float	pt1[3];
 	float			pt0[6];
 	float			v0[6];
-	float			deg[3];
+	float			d[3];
 	float			*k;
 
 	ft_set_v0(v0, vec);
 	ft_rot_v0_pt0(v0, pt0, obj, vec);
-	deg[2] = v0[3] / obj->pow2_a + v0[4] / obj->pow2_b - v0[5] / obj->pow2_c;
-	deg[1] = v0[0] * pt0[0] / obj->pow2_a + v0[1] * pt0[1] / obj->pow2_b;
-	deg[1] = (deg[1] - v0[2] * pt0[2] / obj->pow2_c) * 2;
-	deg[0] = pt0[3] / obj->pow2_a + pt0[4] / obj->pow2_b;
-	deg[0] += obj->sign * obj->pow2_r - pt0[5] / obj->pow2_c;
-	if (!(k = ft_quadratic_equation(deg[2], deg[1], deg[0])))
+	d[2] = v0[3] / obj->pow2_a + v0[4] / obj->pow2_b - v0[5] / obj->pow2_c;
+	d[1] = v0[0] * pt0[0] / obj->pow2_a + v0[1] * pt0[1] / obj->pow2_b;
+	d[1] = (d[1] - v0[2] * pt0[2] / obj->pow2_c) * 2;
+	d[0] = pt0[3] / obj->pow2_a + pt0[4] / obj->pow2_b;
+	d[0] += obj->sign * obj->pow2_r - pt0[5] / obj->pow2_c;
+	if (!(k = ft_quadratic_equation(d[2], d[1], d[0])))
 		return (NULL);
 	pt1[0] = v0[0] * k[0] + pt0[0];
 	pt1[1] = v0[1] * k[0] + pt0[1];
@@ -113,17 +113,17 @@ float		*ft_ellipsoid(t_obj *obj, t_vec *vec)
 	static float	pt1[3];
 	float			pt0[6];
 	float			v0[6];
-	float			deg[3];
+	float			d[3];
 	float			*k;
 
 	ft_set_v0(v0, vec);
 	ft_rot_v0_pt0(v0, pt0, obj, vec);
-	deg[2] = v0[3] / obj->pow2_a + v0[4] / obj->pow2_b + v0[5] / obj->pow2_c;
-	deg[1] = v0[0] * pt0[0] / obj->pow2_a + v0[1] * pt0[1] / obj->pow2_b;
-	deg[1] = (deg[1] + v0[2] * pt0[2] / obj->pow2_c) * 2;
-	deg[0] = pt0[3] / obj->pow2_a + pt0[4] / obj->pow2_b;
-	deg[0] += pt0[5] / obj->pow2_c - obj->pow2_r;
-	if (!(k = ft_quadratic_equation(deg[2], deg[1], deg[0])))
+	d[2] = v0[3] / obj->pow2_a + v0[4] / obj->pow2_b + v0[5] / obj->pow2_c;
+	d[1] = v0[0] * pt0[0] / obj->pow2_a + v0[1] * pt0[1] / obj->pow2_b;
+	d[1] = (d[1] + v0[2] * pt0[2] / obj->pow2_c) * 2;
+	d[0] = pt0[3] / obj->pow2_a + pt0[4] / obj->pow2_b;
+	d[0] += pt0[5] / obj->pow2_c - obj->pow2_r;
+	if (!(k = ft_quadratic_equation(d[2], d[1], d[0])))
 		return (NULL);
 	pt1[0] = v0[0] * k[0] + pt0[0];
 	pt1[1] = v0[1] * k[0] + pt0[1];

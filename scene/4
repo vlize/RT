@@ -15,7 +15,7 @@ plane
 0x0000FF
 px = 0
 py = 0
-pz = -55
+pz = -50
 rx = 0
 ry = 0
 rz = 0
@@ -23,8 +23,9 @@ rz = 0
 #hyperboloid
 #paraboloid
 #ellipsoid
-#torus
-Möbius strip
+#Möbius strip
+#ding-dong
+torus
 0xFFFF00
 px = 0
 py = 0
@@ -32,8 +33,8 @@ pz = 0
 rx = 0
 ry = 0
 rz = 0
-r = 1
-#R = 2
+r = 5
+R = 10
 #a = 3
 #b = 2
 #c = 1

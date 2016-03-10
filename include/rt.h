@@ -6,7 +6,7 @@
 /*   By: vlize <vlize@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/21 15:45:00 by vlize             #+#    #+#             */
-/*   Updated: 2016/03/09 15:53:22 by vlize            ###   ########.fr       */
+/*   Updated: 2016/03/10 15:01:40 by vlize            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # define GREEN_0 0
 # define AMBIANT 0.33
 # define LIGHT_INT 0xFF
-# define SPECULAR_POW 16
+# define SPECULAR_POW 24
 # define SPOT_LIGHT_INT 0x155
 # define SPOT_LIGHT_POW 4096
 # define EPSILON 0.001
@@ -53,6 +53,7 @@
 # define PARABOLOID 6
 # define HYPERBOLOID 7
 # define MOBIUS_STRIP 9
+# define DING_DONG 10
 # define PX "px = "
 # define PY "py = "
 # define PZ "pz = "
@@ -180,7 +181,7 @@ void				ft_angle_cos_sin(float angle, float angle_cos_sin[3]);
 void				ft_rotation_matrix(float *a, float *o, float an[3], int n);
 void				ft_vector_rotation(float v[3], t_vec *ve, t_obj *ob, int n);
 void				ft_vector_equation(t_obj *obj);
-void				ft_complex_roots(float *real, float *imag, float k);
+void				ft_complex_root(float *rl, float *im, float n, size_t k);
 void				ft_set_v0(float *v0, t_vec *vec);
 void				ft_set_pt0(float *pt0, t_obj *obj, t_vec *vec);
 void				ft_rot_v0_pt0(float *v, float *p, t_obj *obj, t_vec *vec);
@@ -198,13 +199,14 @@ float				*ft_hyperboloid(t_obj *obj, t_vec *vec);
 float				*ft_ellipsoid(t_obj *obj, t_vec *vec);
 float				*ft_mobius_strip(t_obj *obj, t_vec *vec);
 float				*ft_ray_collision(t_obj *obj, t_vec *vec);
+int					ft_cubic_roots(float *x, float *xi);
 int					ft_nearest_point(float pt[4], float *pt1, t_vec *vec);
 void				ft_lux_tracing(int *color, float *pt, t_env *env);
 void				ft_normal_direction(float *n, t_vec *vec);
+void				ft_normal3(float *n, t_env *env);
 void				ft_normal2(float *n, t_env *env);
 void				ft_normal(float *v, t_env *env);
 void				ft_check_color(int	*color);
 void				ft_spot_tracing(int *color, t_env *env);
-void				ft_mobius_strip_normal(float *n, t_env *env);
 
 #endif

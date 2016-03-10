@@ -6,7 +6,7 @@
 /*   By: vlize <vlize@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/27 09:42:26 by vlize             #+#    #+#             */
-/*   Updated: 2016/03/09 14:31:41 by vlize            ###   ########.fr       */
+/*   Updated: 2016/03/10 14:41:18 by vlize            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,24 +34,19 @@ float	*ft_quadratic_equation(float a, float b, float c)
 	return (result);
 }
 
-void	ft_complex_roots(float *real, float *imag, float k)
+void	ft_complex_root(float *real, float *imag, float n, size_t k)
 {
-	float	tmp;
+	float	p;
+	float	alpha;
+	float	theta;
 
-	if (!imag[1])
-	{
-		real[1] = sqrtf(real[1]);
-		real[2] = k / (real[0] * real[1]);
+	if (!real || !imag || (k >= n))
 		return ;
-	}
-	else
-	{
-		tmp = sqrtf((hypotf(real[1], imag[1]) - real[1]) / 2);
-		real[1] = imag[1] / (2 * tmp);
-		imag[1] = tmp;
-	}
-	real[2] = k / (real[1] * powf(imag[1], 2) / real[1]);
-	imag[2] = 0 - real[2] * imag[1] / real[1];
+	p = pow(hypotf(real[0], imag[0]), 1 / n);
+	alpha = atanf(imag[0] / real[0]);
+	theta = (alpha + k * 2 * M_PI) / n;
+	real[0] = p * cosf(theta);
+	imag[0] = p * sinf(theta);
 }
 
 void	ft_rotation_matrix(float *absc, float *ord, float angle[3], int neg)

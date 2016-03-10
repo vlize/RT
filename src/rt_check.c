@@ -6,7 +6,7 @@
 /*   By: vlize <vlize@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/29 11:09:00 by vlize             #+#    #+#             */
-/*   Updated: 2016/03/03 08:38:29 by vlize            ###   ########.fr       */
+/*   Updated: 2016/03/10 13:57:24 by vlize            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int		ft_is_object(char *str)
 		return (HYPERBOLOID);
 	if (!ft_strcmp(str, "torus"))
 		return (TORUS);
+	if (!ft_strcmp(str, "ding-dong"))
+		return (DING_DONG);
 	if (!ft_strcmp(str, "Möbius strip"))
 		return (MOBIUS_STRIP);
 	return (0);

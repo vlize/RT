@@ -6,7 +6,7 @@
 /*   By: vlize <vlize@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/21 15:45:00 by vlize             #+#    #+#             */
-/*   Updated: 2016/03/10 15:01:40 by vlize            ###   ########.fr       */
+/*   Updated: 2016/03/11 17:24:33 by vlize            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,7 +188,7 @@ void				ft_rot_v0_pt0(float *v, float *p, t_obj *obj, t_vec *vec);
 float				*ft_rot_pt1(float *pt1, t_obj *obj);
 float				*ft_quadratic_equation(float a, float b, float c);
 float				*ft_quartic_equation(float *degree);
-float				*ft_cubic_equation(float *degree, float *xi);
+float				*ft_cubic_equation(float *degree);
 float				*ft_plane(t_obj *obj, t_vec *vec);
 float				*ft_sphere(t_obj *obj, t_vec *vec);
 float				*ft_cylinder(t_obj *obj, t_vec *vec);
@@ -199,7 +199,7 @@ float				*ft_hyperboloid(t_obj *obj, t_vec *vec);
 float				*ft_ellipsoid(t_obj *obj, t_vec *vec);
 float				*ft_mobius_strip(t_obj *obj, t_vec *vec);
 float				*ft_ray_collision(t_obj *obj, t_vec *vec);
-int					ft_cubic_roots(float *x, float *xi);
+int					ft_cubic_roots(float *x);
 int					ft_nearest_point(float pt[4], float *pt1, t_vec *vec);
 void				ft_lux_tracing(int *color, float *pt, t_env *env);
 void				ft_normal_direction(float *n, t_vec *vec);

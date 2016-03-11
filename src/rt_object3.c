@@ -6,7 +6,7 @@
 /*   By: vlize <vlize@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/10 12:48:38 by vlize             #+#    #+#             */
-/*   Updated: 2016/03/10 13:22:28 by vlize            ###   ########.fr       */
+/*   Updated: 2016/03/11 17:25:01 by vlize            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ float		*ft_ding_dong(t_obj *obj, t_vec *vec)
 	static float	pt1[3];
 	float			pt0[6];
 	float			v0[6];
-	float			d[5];
+	float			d[4];
 	float			*k;
 
 	ft_set_v0(v0, vec);
@@ -28,9 +28,9 @@ float		*ft_ding_dong(t_obj *obj, t_vec *vec)
 	d[2] = v0[3] + v0[4] + v0[5] * d[0];
 	d[1] = pt0[0] * v0[0] + pt0[1] * v0[1] + pt0[2] * v0[2] * d[0];
 	d[0] = pt0[3] + pt0[4] - pt0[5] + pow(pt0[2], 3);
-	if (!(k = ft_cubic_equation(d, &d[4])))
+	if (!(k = ft_cubic_equation(d)))
 		return (NULL);
-	if (!ft_cubic_roots(k, &d[4]))
+	if (!ft_cubic_roots(k))
 		return (NULL);
 	pt1[0] = v0[0] * k[0] + pt0[0];
 	pt1[1] = v0[1] * k[0] + pt0[1];
@@ -58,15 +58,15 @@ float		*ft_mobius_strip(t_obj *obj, t_vec *vec)
 	static float	pt1[3];
 	float			pt0[6];
 	float			v0[6];
-	float			d[7];
+	float			d[4];
 	float			*k;
 
 	ft_set_v0(v0, vec);
 	ft_rot_v0_pt0(v0, pt0, obj, vec);
 	ft_cubic_init(d, pt0, v0, obj);
-	if (!(k = ft_cubic_equation(d, &d[4])))
+	if (!(k = ft_cubic_equation(d)))
 		return (NULL);
-	if (!ft_cubic_roots(k, &d[4]))
+	if (!ft_cubic_roots(k))
 		return (NULL);
 	pt1[0] = v0[0] * k[0] + pt0[0];
 	pt1[1] = v0[1] * k[0] + pt0[1];
